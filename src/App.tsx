@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useState } from "react";
+import useUsers from "./useUsers";
+import Header from "./components/Header";
+import UserComponent from "./components/User";
+// import type {User} from './types'
 
-function App() {
+function App():JSX.Element {
+  const { data } = useUsers();
+
+  const [team, setTeam] = useState<string[]>([]);
+  const toggleToTeam = useCallback((id: string, isOnTeam: boolean) => {
+    if (isOnTeam) {
+      setTeam((oldTeam) => {
+        return oldTeam.filter((memberId) => memberId !== id);
+      });
+    } else {
+      setTeam((oldTeam) => {
+        return [...oldTeam, id];
+      });
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header team={team} />
+      <div className="container m-auto">
+        {data?.map((user) => (
+          <UserComponent
+            key={user.login.uuid}
+            {...user}
+            toggleToTeam={toggleToTeam}
+            isOnTeam={team.includes(user.login.uuid)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
