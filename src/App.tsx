@@ -1,38 +1,30 @@
-import React, { useCallback, useState } from "react";
-import useUsers from "./useUsers";
-import Header from "./components/Header";
-import UserComponent from "./components/User";
-// import type {User} from './types'
+import React, { lazy, Suspense } from "react";
+import { useSocketContext } from './service/SocketContextProvider'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Error from './components/Error'
 
-function App():JSX.Element {
-  const { data } = useUsers();
+const Quiz = lazy(() => import('./components/Quiz'))
+const Admin = lazy(() => import('./components/Admin'))
 
-  const [team, setTeam] = useState<string[]>([]);
-  const toggleToTeam = useCallback((id: string, isOnTeam: boolean) => {
-    if (isOnTeam) {
-      setTeam((oldTeam) => {
-        return oldTeam.filter((memberId) => memberId !== id);
-      });
-    } else {
-      setTeam((oldTeam) => {
-        return [...oldTeam, id];
-      });
-    }
-  }, []);
+function App(): JSX.Element {
+  const { isConnected, state } = useSocketContext()
+
+  if (!isConnected || !state.questions.length) return <Error>You're not connected, hang on.</Error>
+
   return (
-    <>
-      <Header team={team} />
-      <div className="container m-auto">
-        {data?.map((user) => (
-          <UserComponent
-            key={user.login.uuid}
-            {...user}
-            toggleToTeam={toggleToTeam}
-            isOnTeam={team.includes(user.login.uuid)}
-          />
-        ))}
+    <div className="h-screen bg-slate-900">
+      <div className="md:container md:mx-auto">
+        <Suspense fallback="">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Quiz></Quiz>}></Route>
+              <Route path="/admin" element={<Admin></Admin>}></Route>
+            </Routes>
+          </BrowserRouter>
+        </Suspense>
       </div>
-    </>
+    </div>
+
   );
 }
 
