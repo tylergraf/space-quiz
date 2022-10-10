@@ -1,18 +1,43 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export default function Arrays(): void {
+export{}
 
-  const questions: (string | number)[] = ['What is stuff?', 'Who are you?', 3]
 
-  questions.map(question => {
-    if (typeof question === 'string') {
-      question.toUpperCase()
-    }
-    return question
-  })
 
-  const threeQuestions: [string, string, string] = ['1','2','3']
 
-  const status: 'loading' | 'error' | 'success' = 'loading'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // const drivers: (string | number)[] = ['VET', 'VER', 44]
 
@@ -27,4 +52,4 @@ export default function Arrays(): void {
 
   // const status: 'retired' | 'driving' | 'waiting' = 'waiting'
 
-}
+
