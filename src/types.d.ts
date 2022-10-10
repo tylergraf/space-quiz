@@ -13,6 +13,7 @@ export declare type Answer = {
 export declare type User = {
   id?: string
   name?: string
+  latency?: number
 }
 export declare type State = {
   questionIndex: number
@@ -30,4 +31,7 @@ export declare type Context = {
   addName: Function
   setAnswer: Function
   user?: User
+  checkLatency?: Function
+  goToLatency?: Function
+  playSound?: Function
 }

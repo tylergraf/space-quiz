@@ -1,7 +1,8 @@
 import { useSocketContext } from "service/SocketContextProvider";
+import Button from "../Button";
 
 export default function Results() {
-  const { state } = useSocketContext()
+  const { state, goToLatency } = useSocketContext()
   const users = state.users.map((user) => {
     const correctCount = state.answers.filter((answer, i) => {
       if (!user?.id) return false
@@ -17,6 +18,6 @@ export default function Results() {
         return <li className="text-2xl font-bold text-white">{user.correctCount} {user.name}</li>
       })}
     </ul>
-
+    <Button onClick={()=>goToLatency?.()}>Go to Latency</Button>
   </div>
 }
