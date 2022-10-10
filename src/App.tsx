@@ -1,15 +1,14 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { useSocketContext } from './service/SocketContextProvider'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Error from './components/Error'
 
-const Quiz = lazy(() => import('./components/Quiz'))
-const Admin = lazy(() => import('./components/Admin'))
+// const Quiz = lazy(() => import('./components/Quiz'))
 
 function App(): JSX.Element {
-  const { isConnected, state } = useSocketContext()
+  const { isConnected } = useSocketContext()
 
-  if (!isConnected || !state.questions.length) return <Error>You're not connected, hang on.</Error>
+  if (!isConnected) return <Error>You're not connected, hang on.</Error>
 
   return (
     <div className="h-screen bg-slate-900">
@@ -17,8 +16,7 @@ function App(): JSX.Element {
         <Suspense fallback="">
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Quiz></Quiz>}></Route>
-              <Route path="/admin" element={<Admin></Admin>}></Route>
+              {/* <Route path="/" element={<Quiz></Quiz>}></Route> */}
             </Routes>
           </BrowserRouter>
         </Suspense>

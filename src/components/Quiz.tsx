@@ -1,22 +1,64 @@
-import { useSocketContext } from "service/SocketContextProvider"
-import Question from './Question'
-import Name from './Name'
 
-type Props = {
-  admin?: boolean
-  showAnswer?: boolean
-}
+export {}
 
-export default function Quiz({ admin, showAnswer }: Props): JSX.Element | null {
-  const { state, user, setAnswer } = useSocketContext()
 
-  if(!user?.name && !admin) return <Name></Name>
-  if(!user?.id) return null
 
-  const userAnswer: number | undefined = !admin ? state.answers[state.questionIndex]?.[user.id] : undefined
 
-  return <div className="p-6">
-    <h1 className="text-6xl mb-5 font-bold text-white">Quiz</h1>
-    {state?.questions && typeof state?.questionIndex !== 'undefined' && <Question userAnswer={userAnswer} showAnswer={showAnswer} {...state?.questions[state?.questionIndex]} questionIndex={state?.questionIndex} setAnswer={setAnswer}></Question>}
-  </div>
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useSocketContext } from "service/SocketContextProvider"
+// import HeaderBlock from "./HeaderBlock"
+// import Question from './Question'
+
+// export default function Quiz(){
+  
+//   const {state} = useSocketContext()
+
+//   const handleAnswer = console.log
+
+//   return <div className="pt-10">
+//     <HeaderBlock heading="Quiz" size="xl"></HeaderBlock>
+    
+//     {state.questions && <Question {...state.questions[state.questionIndex]} onAnswer={handleAnswer}></Question>}
+
+//     </div>
+// }

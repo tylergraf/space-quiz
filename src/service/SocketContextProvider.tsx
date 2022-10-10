@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import { io } from "socket.io-client";
-import { v4 } from 'uuid';
-import localforage from 'localforage';
-import type { Context, State, User } from '../types'
+// import { v4 } from 'uuid';
+// import localforage from 'localforage';
+import type { State, Context } from '../types'
 
 // const socket = io("localhost:3001")
 const socket = io("https://space-quiz-api.herokuapp.com")
@@ -11,17 +11,13 @@ type Props = {
   children: React.ReactNode
 }
 
-const defaultState = {
+const defaultState: State = {
   questionIndex: 0,
-  questions: [],
-  answers: [],
-  users: []
+  connections: 0,
 }
 const defaultContext: Context = {
   nextQuestion: () => { },
   prevQuestion: () => { },
-  addName: () => { },
-  setAnswer: () => { },
   isConnected: false,
   state: defaultState
 }
@@ -34,27 +30,8 @@ export const useSocketContext = (): Context => {
 }
 
 export default function SocketContextProvider({ children }: Props): JSX.Element {
-  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [isConnected, setIsConnected] = useState(socket.connected)
   const [state, setState] = useState<State>(defaultState)
-  const [user, setUser] = useState<User>({})
-  useEffect(() => {
-    localforage.getItem('user').then((cachedUser) => {
-      if (cachedUser) {
-        setUser(cachedUser)
-      } else {
-        const id = v4()
-        setUser({ id })
-      }
-    })
-
-  }, [])
-
-  useEffect(() => {
-    if (user?.id) {
-      localforage.setItem('user', user)
-      socket.emit('setUser', user)
-    }
-  }, [user])
 
   useEffect(() => {
 
@@ -64,14 +41,11 @@ export default function SocketContextProvider({ children }: Props): JSX.Element 
     });
     socket.on('state', setState)
 
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
-
     socket.on('disconnect', () => {
       setIsConnected(false);
       console.log('disconnected')
     });
+
     return () => {
       socket.off('connect');
       socket.off('disconnect');
@@ -79,20 +53,14 @@ export default function SocketContextProvider({ children }: Props): JSX.Element 
     }
   }, [])
 
-  const setAnswer = (index: number) => {
-    socket.emit('setAnswer', { user, index })
-  }
   const nextQuestion = () => {
     socket.emit('nextQuestion')
   }
   const prevQuestion = () => {
     socket.emit('prevQuestion')
   }
-  const addName = (name: string) => {
-    setUser(stateUser => ({ ...stateUser, name }))
-  }
 
-  const value: Context = { state, nextQuestion, prevQuestion, isConnected, addName, user, setAnswer }
+  const value: Context = { state, nextQuestion, prevQuestion, isConnected }
   
   console.log(value)
 
