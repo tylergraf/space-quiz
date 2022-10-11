@@ -32,6 +32,6 @@ export declare type Context = {
   setAnswer: Function
   user?: User
   checkLatency?: Function
-  goToLatency?: Function
+  navigate?: Function
   playSound?: Function
 }

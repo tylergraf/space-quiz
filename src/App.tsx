@@ -6,6 +6,7 @@ import Error from './components/Error'
 const Quiz = lazy(() => import('./components/Quiz'))
 const Admin = lazy(() => import('./components/Admin'))
 const CheckLatency = lazy(() => import('./components/CheckLatency'))
+const Results = lazy(() => import('./components/Results'))
 
 function App(): JSX.Element {
   const { isConnected, state } = useSocketContext()
@@ -19,6 +20,7 @@ function App(): JSX.Element {
           <Route path="/" element={<Quiz></Quiz>}></Route>
           <Route path="/admin/*" element={<Admin></Admin>}></Route>
           <Route path="/latency" element={<CheckLatency></CheckLatency>}></Route>
+          <Route path="/results" element={<Results></Results>}></Route>
         </Routes>
       </div>
     </div>

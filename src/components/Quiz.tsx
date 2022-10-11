@@ -17,6 +17,6 @@ export default function Quiz({ admin, showAnswer }: Props): JSX.Element | null {
 
   return <div className="p-6">
     <h1 className="text-6xl mb-5 font-bold text-white">Quiz</h1>
-    {state?.questions && typeof state?.questionIndex !== 'undefined' && <Question userAnswer={userAnswer} showAnswer={showAnswer} {...state?.questions[state?.questionIndex]} questionIndex={state?.questionIndex} setAnswer={setAnswer}></Question>}
+    {state?.questions && typeof state?.questionIndex !== 'undefined' && <Question admin={admin} userAnswer={userAnswer} showAnswer={showAnswer} {...state?.questions[state?.questionIndex]} questionIndex={state?.questionIndex} setAnswer={setAnswer}></Question>}
   </div>
 }

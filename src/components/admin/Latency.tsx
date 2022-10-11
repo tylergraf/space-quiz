@@ -6,7 +6,7 @@ function getRandomArbitrary(min:number, max:number) {
   return Math.round(Math.random() * (max - min) + min)
 }
 export default function Results() {
-  const { state, goToLatency, playSound } = useSocketContext()
+  const { state, playSound } = useSocketContext()
   const users = state.users.filter(user=>user.latency)
   .map((user) => {
     return user.latency || 0

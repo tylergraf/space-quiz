@@ -5,8 +5,8 @@ import localforage from 'localforage';
 import type { Context, State, User } from '../types'
 import {useNavigate} from 'react-router-dom'
 
-// const socket = io("localhost:3001")
-const socket = io("https://space-quiz-api.herokuapp.com")
+const socket = io("localhost:3001")
+// const socket = io("https://space-quiz-api.herokuapp.com")
 
 type Props = {
   children: React.ReactNode
@@ -133,14 +133,14 @@ export default function SocketContextProvider({ children }: Props): JSX.Element 
   const addName = (name: string) => {
     setUser(stateUser => ({ ...stateUser, name }))
   }
-  const goToLatency = () => {
-    socket.emit('navigate', '/latency')
+  const handleNavigate = (path: string) => {
+    socket.emit('navigate', path)
   }
   const playSound = (data: {latent?: boolean,src: string}) => {
     socket.emit('playSound', data)
   }
 
-  const value: Context = { state, nextQuestion, prevQuestion, isConnected, addName, user, setAnswer, checkLatency, goToLatency, playSound }
+  const value: Context = { state, nextQuestion, prevQuestion, isConnected, addName, user, setAnswer, checkLatency, navigate: handleNavigate, playSound }
   
   console.log(value)
 
