@@ -12,7 +12,7 @@ export default function QuestionComponent({ admin, value, width = '75%', img, sh
   
   return  <div>
     <h2 className="text-3xl text-white font-bold mb-10">{questionIndex + 1}. {value}</h2>
-    {img && <div className="flex justify-center"><img style={{ width: admin ? width : '100%' }} className="bg-white" src={img} alt="Space Telescope" /></div>}
+    {admin && img && <div className="flex justify-center"><img style={{ width: admin ? width : '100%' }} className="bg-white" src={img} alt="Space Telescope" /></div>}
     <ul className="flex flex-wrap">
       {possibleAnswers.map((possibleAnswer, index) => {
         let color = userAnswer === index ? 'bg-yellow-500' : 'bg-amber-600'
