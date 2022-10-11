@@ -1,11 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import { io } from "socket.io-client";
 // import { v4 } from 'uuid';
-// import localforage from 'localforage';
 import type { Context } from '../types'
 
-// const socket = io("localhost:3001")
-const socket = io("https://space-quiz-api.herokuapp.com")
+const socket = io("localhost:3001")
+// const socket = io("https://space-quiz-api.herokuapp.com")
 
 type Props = {
   children: React.ReactNode
