@@ -1,12 +1,12 @@
 import { lazy, Suspense } from "react";
-import { useSocketContext } from './service/SocketContextProvider'
+import { useQuizContext } from './service/QuizProvider'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Error from './components/Error'
 
 const Quiz = lazy(() => import('./components/Quiz'))
 
 function App(): JSX.Element {
-  const { isConnected } = useSocketContext()
+  const { isConnected } = useQuizContext()
 
   if (!isConnected) return <Error>You're not connected, hang on.</Error>
 
