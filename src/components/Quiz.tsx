@@ -1,5 +1,8 @@
-
-export {}
+export default function Quiz(){
+  return <div>
+    <h1 className="text-white font-bold text-3xl">Quiz</h1>
+  </div>
+}
 
 
 

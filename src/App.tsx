@@ -3,7 +3,7 @@ import { useSocketContext } from './service/SocketContextProvider'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Error from './components/Error'
 
-// const Quiz = lazy(() => import('./components/Quiz'))
+const Quiz = lazy(() => import('./components/Quiz'))
 
 function App(): JSX.Element {
   const { isConnected } = useSocketContext()
@@ -16,7 +16,7 @@ function App(): JSX.Element {
         <Suspense fallback="">
           <BrowserRouter>
             <Routes>
-              {/* <Route path="/" element={<Quiz></Quiz>}></Route> */}
+              <Route path="/" element={<Quiz></Quiz>}></Route>
             </Routes>
           </BrowserRouter>
         </Suspense>

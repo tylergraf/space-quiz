@@ -1,4 +1,4 @@
-export {}
+export default function HeaderBlock(){}
 
 
 
@@ -44,23 +44,18 @@ export {}
 
 
 
-
+// const sizeMap = {
+//   sm: 'text-4xl',
+//   md: 'text-5xl',
+//   lg: 'text-6xl',
+// }
 
 // type Props = {
 //   heading: string
-//   size?: 'xs'|'sm'|'md'|'lg'|'xl'|'xxl'
+//   size: 'sm'|'md'|'lg'
 // }
 
-// const sizeMap = {
-//   xs: 'text-xl',
-//   sm: 'text-2xl',
-//   md: 'text-3xl',
-//   lg: 'text-4xl',
-//   xl: 'text-5xl',
-//   xxl: 'text-6xl',
-// }
-
-// export default function HeaderBlock({heading, size='lg'}: Props) {
+// export default function HeaderBlock({heading, size}:Props){
 //   const headingSize = sizeMap[size]
 
 //   return <h1 className={`text-white font-bold ${headingSize}`}>{heading}</h1>
