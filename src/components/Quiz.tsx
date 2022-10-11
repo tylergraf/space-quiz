@@ -1,6 +1,13 @@
+import { useQuizContext } from "service/QuizProvider"
+import Question from './Question'
+
 export default function Quiz(){
+  const {state} = useQuizContext()
+  
   return <div>
     <h1 className="text-white font-bold text-3xl">Quiz</h1>
+    
+    <Question {...state.questions[state.questionIndex]} onAnswer={()=>{}}></Question>
   </div>
 }
 

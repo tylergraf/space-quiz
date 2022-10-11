@@ -1,4 +1,18 @@
+export declare type Question = {
+  value: string
+  possibleAnswers: string[]
+  correctAnswer: number
+}
+
+export declare type State = {
+  questionIndex: number
+  connections: number
+  questions: Question[]
+  answers: []
+}
+
 export declare type Context = {
+  state: State
   isConnected: boolean
 }
 
